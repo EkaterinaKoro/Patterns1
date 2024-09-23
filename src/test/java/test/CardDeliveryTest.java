@@ -83,7 +83,7 @@ public class CardDeliveryTest {
     }
 
     @Test
-    void shouldBeDoneWithPhone() {
+    void ShouldBeDoneWithPhone() {
         $("[data-test-id='city'] input").setValue(cardData.getCity());
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(date3);
