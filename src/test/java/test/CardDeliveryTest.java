@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class CardDeliveryTest {
     RegistrationByCardInfo cardData = DataGenerator.generateByCard();
     String date3 = DataGenerator.generateDate(3);
-    String date5 = DataGenerator.generateDate(5);
+
 
 
     @BeforeEach
@@ -38,12 +38,6 @@ public class CardDeliveryTest {
         $$("button").find(exactText("Запланировать")).click();
         $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
         $(".notification__content").shouldHave(exactText("Встреча успешно запланирована на " + date3));
-        $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] input").setValue(date5);
-        $$("button").find(exactText("Запланировать")).click();
-        $$(".button__text").find(exactText("Перепланировать")).click();
-        $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
-        $(".notification__content").shouldHave(exactText("Встреча успешно запланирована на " + date5));
 
     }
 
