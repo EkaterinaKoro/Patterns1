@@ -28,7 +28,7 @@ public class CardDeliveryTest {
     }
 
     @Test
-    void SendTheCorrectCardForm() {
+    void sendTheCorrectCardForm() {
         $("[data-test-id='city'] input").setValue(cardData.getCity());
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(date3);
@@ -86,7 +86,7 @@ public class CardDeliveryTest {
     void shouldBeDoneWithPhone() {
         $("[data-test-id='city'] input").setValue(cardData.getCity());
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] input").setValue(date5);
+        $("[data-test-id='date'] input").setValue(date3);
         $("[data-test-id='name'] input").setValue(cardData.getName());
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Запланировать")).click();
@@ -98,7 +98,7 @@ public class CardDeliveryTest {
     void shouldBeDoneWithAgreement() {
             $("[data-test-id='city'] input").setValue(cardData.getCity());
             $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-            $("[data-test-id='date'] input").setValue(date5);
+            $("[data-test-id='date'] input").setValue(date3);
             $("[data-test-id='name'] input").setValue(cardData.getName());
             $("[data-test-id='phone'] input").setValue(cardData.getNumber());
             $$("button").find(exactText("Запланировать")).click();
