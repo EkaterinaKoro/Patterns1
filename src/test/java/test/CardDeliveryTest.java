@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class CardDeliveryTest {
     RegistrationByCardInfo cardData = DataGenerator.generateByCard();
     String date3 = DataGenerator.generateDate(3);
-
+    String date4 = DataGenerator.generateDate(4);
 
 
     @BeforeEach
@@ -39,6 +39,24 @@ public class CardDeliveryTest {
         $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
         $(".notification__content").shouldHave(exactText("Встреча успешно запланирована на " + date3));
 
+    }
+
+    @Test
+    void shouldBeReplanedAnotherDate() {
+        $("[data-test-id='city'] input").setValue(cardData.getCity());
+        $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id='date'] input").setValue(date3);
+        $("[data-test-id='name'] input").setValue(cardData.getName());
+        $("[data-test-id='phone'] input").setValue(cardData.getNumber());
+        $("[data-test-id='agreement']").click();
+        $$("button").find(exactText("Запланировать")).click();
+
+        $("[data-test-id='date'] .input__control").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
+        $("[data-test-id='date'] input").setValue(date4);
+        $$("button").find(exactText("Запланировать")).click();
+        $("[data-test-id='replan-notification'] .notification__title").shouldHave(exactText("Необходимо подтверждение"));
+        $("[data-test-id='replan-notification'] button").click();
+        $("[data-test-id='success-notification'] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " + date4));
     }
 
     @Test
@@ -90,15 +108,15 @@ public class CardDeliveryTest {
 
     @Test
     void shouldBeDoneWithAgreement() {
-            $("[data-test-id='city'] input").setValue(cardData.getCity());
-            $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-            $("[data-test-id='date'] input").setValue(date3);
-            $("[data-test-id='name'] input").setValue(cardData.getName());
-            $("[data-test-id='phone'] input").setValue(cardData.getNumber());
-            $$("button").find(exactText("Запланировать")).click();
-            $(".input_invalid .checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
-        }
+        $("[data-test-id='city'] input").setValue(cardData.getCity());
+        $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id='date'] input").setValue(date3);
+        $("[data-test-id='name'] input").setValue(cardData.getName());
+        $("[data-test-id='phone'] input").setValue(cardData.getNumber());
+        $$("button").find(exactText("Запланировать")).click();
+        $(".input_invalid .checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
     }
+}
 
 
 
