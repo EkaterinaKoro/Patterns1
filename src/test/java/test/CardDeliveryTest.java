@@ -50,7 +50,7 @@ public class CardDeliveryTest {
         $("[data-test-id='phone'] input").setValue(cardData.getNumber());
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Запланировать")).click();
-
+        $("[data-test-id='success-notification'] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " + date3));
         $("[data-test-id='date'] .input__control").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(date4);
         $$("button").find(exactText("Запланировать")).click();
